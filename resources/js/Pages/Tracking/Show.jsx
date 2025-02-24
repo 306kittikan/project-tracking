@@ -3,10 +3,10 @@ import { Link } from "@inertiajs/react";
 export default function TrackingShow({ tracking }) {
     return (
         <div className="min-h-screen bg-gray-100">
-            {/* ✅ Navbar */}
+            {/*  Navbar */}
             <nav className="bg-gray-900 text-white p-4 shadow-lg">
                 <div className="container mx-auto flex justify-between items-center">
-                    <h1 className="text-xl font-bold">📦 ระบบติดตามสินค้า</h1>
+                    <h1 className="text-xl font-bold"> ระบบติดตามสินค้า</h1>
                     <ul className="flex space-x-6">
                         <li><Link href="/products" className="hover:text-gray-400">สินค้า</Link></li>
                         <li><Link href="/orders" className="hover:text-gray-400">คำสั่งซื้อ</Link></li>
@@ -16,9 +16,9 @@ export default function TrackingShow({ tracking }) {
                 </div>
             </nav>
 
-            {/* ✅ รายละเอียดการติดตาม */}
+            {/*  รายละเอียดการติดตาม */}
             <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-                <h1 className="text-2xl font-bold mb-4">📦 สถานะการจัดส่ง</h1>
+                <h1 className="text-2xl font-bold mb-4"> สถานะการจัดส่ง</h1>
                 
                 {tracking?.order ? (
                     <>
@@ -29,7 +29,7 @@ export default function TrackingShow({ tracking }) {
                             <strong>ลูกค้า:</strong> {tracking.order.user?.name || "ไม่พบข้อมูลลูกค้า"}
                         </p>
 
-                        {/* 📌 รายการสินค้า */}
+                        {/*  รายการสินค้า */}
                         <h2 className="text-xl font-semibold mt-4">🛒 รายการสินค้า</h2>
                         <ul className="mt-2 border rounded-lg bg-gray-50">
                             {tracking.order.items && tracking.order.items.length > 0 ? (
@@ -47,12 +47,12 @@ export default function TrackingShow({ tracking }) {
                             )}
                         </ul>
 
-                        {/* 📜 ประวัติการอัปเดตสถานะ */}
-                        <h2 className="text-xl font-semibold mt-4">📜 ประวัติการอัปเดตสถานะ</h2>
+                        {/*  ประวัติการอัปเดตสถานะ */}
+                        <h2 className="text-xl font-semibold mt-4"> ประวัติการอัปเดตสถานะ</h2>
                         <ul className="mt-2 border rounded-lg bg-gray-50">
                             {tracking.statuses && tracking.statuses.length > 0 ? (
-                                tracking.statuses.map((item) => (
-                                    <li key={item.id} className="border-b p-3 flex justify-between">
+                                tracking.statuses.map((item, index) => (
+                                    <li key={item.id} className={`border-b p-3 flex justify-between ${index === 0 ? 'bg-green-100' : ''}`}>
                                         <span className="font-medium">{item.status}</span>
                                         <span className="text-sm text-gray-500">
                                             {new Date(item.updated_at).toLocaleString()}
@@ -63,15 +63,25 @@ export default function TrackingShow({ tracking }) {
                                 <li className="p-3 text-gray-500 text-center">ไม่มีข้อมูลสถานะ</li>
                             )}
                         </ul>
+
+                        {/*  ปุ่มแก้ไขสถานะ */}
+                        <div className="mt-4 text-center">
+                            <Link
+                                href={`/tracking-statuses/${tracking.id}/edit`}
+                                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition"
+                            >
+                                 แก้ไขสถานะ
+                            </Link>
+                        </div>
                     </>
                 ) : (
                     <p className="text-red-500 text-center">ไม่พบข้อมูลคำสั่งซื้อ</p>
                 )}
 
-                {/* ✅ ปุ่มย้อนกลับ */}
+                {/*  ปุ่มย้อนกลับ */}
                 <div className="mt-6 flex justify-center">
                     <Link href="/tracking" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
-                        🔙 กลับไปหน้าติดตามสินค้า
+                         กลับไปหน้าติดตามสินค้า
                     </Link>
                 </div>
             </div>

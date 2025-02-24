@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -18,11 +19,25 @@ class Order extends Model
         'shipping_status'
     ];
 
+    /**
+     * ความสัมพันธ์กับ User (ลูกค้า)
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * ความสัมพันธ์กับ OrderItem (รายการสินค้าในคำสั่งซื้อ)
+     */
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * ความสัมพันธ์กับ Product ผ่าน OrderItem (สินค้าในคำสั่งซื้อ)
+     */
     public function products()
     {
         return $this->belongsToMany(Product::class, 'order_items')
@@ -30,17 +45,21 @@ class Order extends Model
                     ->withTimestamps();
     }
 
-    // ✅ คำนวณราคารวมของคำสั่งซื้อ
+    /**
+     * คำนวณราคารวมของคำสั่งซื้อ
+     */
     public function getTotalPriceAttribute()
     {
-        if (!$this->relationLoaded('products')) {
-            return $this->products()->sum(\DB::raw('order_items.quantity * order_items.price'));
+        if (!$this->relationLoaded('items')) {
+            return $this->items()->sum(DB::raw('quantity * price'));
         }
 
-        return round($this->products->sum(fn ($product) => $product->pivot->quantity * $product->pivot->price), 2);
+        return round($this->items->sum(fn ($item) => $item->quantity * $item->price), 2);
     }
 
-    // ✅ สถานะติดตามคำสั่งซื้อ
+    /**
+     * ความสัมพันธ์กับ TrackingStatus (สถานะติดตามการจัดส่ง)
+     */
     public function trackingStatus()
     {
         return $this->hasOne(TrackingStatus::class, 'order_id')->withDefault([

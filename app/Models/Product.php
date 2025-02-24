@@ -9,14 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'code',
-        'name',
-        'price',
-        'stock'
-    ];
+    protected $fillable = ['code', 'name', 'price', 'stock', 'description', 'image', 'category_id', 'received_date'];
 
-    // ✅ เชื่อมกับคำสั่งซื้อผ่าน order_items
+
+    //  เชื่อมกับคำสั่งซื้อผ่าน order_items
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'order_items')
@@ -24,13 +20,13 @@ class Product extends Model
                     ->withTimestamps();
     }
 
-    // ✅ เช็คว่าสินค้ามีสต็อกพอหรือไม่
+    //  เช็คว่าสินค้ามีสต็อกพอหรือไม่
     public function hasStock($quantity)
     {
         return $this->stock >= $quantity;
     }
 
-    // ✅ หักจำนวนสินค้าออกจากสต็อก
+    //  หักจำนวนสินค้าออกจากสต็อก
     public function decreaseStock($quantity)
     {
         if ($this->hasStock($quantity)) {
@@ -41,7 +37,7 @@ class Product extends Model
         }
     }
 
-    // ✅ เพิ่มสต็อกสินค้า (เช่น กรณียกเลิกออเดอร์)
+    //  เพิ่มสต็อกสินค้า (เช่น กรณียกเลิกออเดอร์)
     public function increaseStock($quantity)
     {
         $this->stock += $quantity;

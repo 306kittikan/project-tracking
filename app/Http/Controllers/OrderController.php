@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
+
 class OrderController extends Controller
 {
     public function index()
@@ -36,14 +37,14 @@ class OrderController extends Controller
             'products.*.quantity' => 'required|integer|min:1',
         ]);
 
-        // ✅ คำนวณราคารวม
+        //  คำนวณราคารวม
         $total_price = 0;
         foreach ($request->products as $item) {
             $product = Product::findOrFail($item['product_id']);
             $total_price += $product->price * $item['quantity'];
         }
 
-        // ✅ สร้างคำสั่งซื้อใหม่
+        //  สร้างคำสั่งซื้อใหม่
         $order = Order::create([
             'order_code' => 'ORD-' . strtoupper(Str::random(8)),
             'user_id' => $request->user_id,
@@ -51,7 +52,7 @@ class OrderController extends Controller
             'total_price' => $total_price,
         ]);
 
-        // ✅ บันทึกรายการสินค้าที่สั่งซื้อ
+        //  บันทึกรายการสินค้าที่สั่งซื้อ
         foreach ($request->products as $item) {
             $product = Product::findOrFail($item['product_id']);
             $order->products()->attach($item['product_id'], [
@@ -98,4 +99,14 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'อัปเดตสถานะการชำระเงินเรียบร้อย!');
     }
+    public function removeItem(Order $order, OrderItem $item)
+{
+    if ($item->order_id !== $order->id) {
+        return redirect()->back()->with('error', 'ไม่สามารถลบรายการสินค้านี้ได้');
+    }
+
+    $item->delete();
+
+    return redirect()->back()->with('success', 'ลบสินค้าออกจากคำสั่งซื้อเรียบร้อย');
+}
 }

@@ -1,11 +1,12 @@
 import { usePage, Link, useForm } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
+import "./UsersIndex.css"; //  นำเข้าไฟล์ CSS
 
 export default function UsersIndex({ users }) {
-    const { auth } = usePage().props; // ดึงข้อมูลผู้ใช้ที่ล็อกอินอยู่
+    const { auth } = usePage().props;
 
     if (!auth.user) {
-        window.location.href = "/login"; // ถ้ายังไม่ได้ล็อกอินให้ redirect ไปหน้า Login
+        window.location.href = "/login";
         return null;
     }
 
@@ -19,47 +20,42 @@ export default function UsersIndex({ users }) {
 
     return (
         <Layout>
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">👥 รายชื่อผู้ใช้</h1>
-                <p>สวัสดี, {auth.user.name}!</p> {/* แสดงชื่อผู้ใช้ที่ล็อกอิน */}
-                
-                <div className="flex justify-end mb-4">
-                    <Link 
-                        href="/users/create" 
-                        className="bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2 rounded shadow"
-                    >
-                        เพิ่มผู้ใช้
+            <div className="users-container">
+                <h1 className="users-title">👥 รายชื่อผู้ใช้</h1>
+
+                {/* ปุ่มเพิ่มผู้ใช้ */}
+                <div className="flex justify-end mb-6">
+                    <Link href="/users/create" className="users-add-button">
+                         เพิ่มผู้ใช้
                     </Link>
                 </div>
 
-                <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-                    <table className="w-full border-collapse">
+                {/* ตารางรายชื่อผู้ใช้ */}
+                <div className="users-table-container">
+                    <table className="users-table">
                         <thead>
-                            <tr className="bg-gray-100 text-gray-700">
-                                <th className="border p-3 text-left">#</th>
-                                <th className="border p-3 text-left">ชื่อ</th>
-                                <th className="border p-3 text-left">อีเมล</th>
-                                <th className="border p-3 text-center">จัดการ</th>
+                            <tr>
+                                <th>#</th>
+                                <th>ชื่อ</th>
+                                <th>อีเมล</th>
+                                <th className="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             {users.map((user, index) => (
-                                <tr key={user.id} className="border hover:bg-gray-50 transition">
-                                    <td className="border p-3">{index + 1}</td>
-                                    <td className="border p-3 font-medium text-gray-800">{user.name}</td>
-                                    <td className="border p-3 text-gray-600">{user.email}</td>
-                                    <td className="border p-3 text-center space-x-2">
-                                        <Link 
-                                            href={`/users/${user.id}/edit`} 
-                                            className="text-blue-500 hover:text-blue-700 font-medium"
-                                        >
-                                            ✏️ แก้ไข
+                                <tr key={user.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td className="users-action">
+                                        <Link href={`/users/${user.id}/edit`} className="users-edit">
+                                             แก้ไข
                                         </Link>
                                         <button
                                             onClick={() => handleDelete(user.id)}
-                                            className="text-red-500 hover:text-red-700 font-medium"
+                                            className="users-delete"
                                         >
-                                            🗑️ ลบ
+                                             ลบ
                                         </button>
                                     </td>
                                 </tr>

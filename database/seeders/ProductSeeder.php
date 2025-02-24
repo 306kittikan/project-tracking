@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
             DB::table('products')->insert([
                 'code' => 'P' . uniqid(4),
                 'name' => $product[0],
-                'description' => $product[1], // ✅ เพิ่มคำอธิบายสินค้า
+                'description' => $product[1], //  เพิ่มคำอธิบายสินค้า
                 'price' => $faker->randomFloat(2, 5000, 100000),
                 'stock' => $faker->numberBetween(10, 100),
                 'created_at' => now(),

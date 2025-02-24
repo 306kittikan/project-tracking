@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code')->unique()->nullable(); // ทำให้ code เป็น nullable
             $table->string('name');
-            $table->text('description')->nullable(); // ✅ ต้องอยู่ก่อน timestamps()
+            $table->text('description')->nullable(); //  ต้องอยู่ก่อน timestamps()
             $table->decimal('price', 10, 2);
             $table->integer('stock');
             $table->timestamps();

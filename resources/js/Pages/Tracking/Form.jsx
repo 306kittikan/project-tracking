@@ -13,15 +13,15 @@ export default function TrackingForm({ tracking = null, orders }) {
     };
 
     const statusOptions = [
-        "กำลังแพ็คของ",
-        "กำลังจัดส่ง",
+        "รอดำเนินการ",
         "จัดส่งแล้ว",
         "ถึงปลายทาง",
+        "ยกเลิกคำสั่งซื้อ",
     ];
 
     return (
         <div className="min-h-screen bg-gray-100">
-            {/* ✅ Navbar */}
+            {/*  Navbar */}
             <nav className="bg-gray-900 text-white p-4 shadow-lg">
                 <div className="container mx-auto flex justify-between items-center">
                     <h1 className="text-xl font-bold">📦 ระบบติดตามสินค้า</h1>
@@ -34,11 +34,11 @@ export default function TrackingForm({ tracking = null, orders }) {
                 </div>
             </nav>
 
-            {/* ✅ ฟอร์มเพิ่ม/แก้ไขสถานะ */}
+            {/*  ฟอร์มเพิ่ม/แก้ไขสถานะ */}
             <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
                 <h2 className="text-2xl font-bold mb-4 text-center">{tracking ? "แก้ไขสถานะ" : "เพิ่มสถานะ"}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* 📌 เลือกคำสั่งซื้อ */}
+                    {/*  เลือกคำสั่งซื้อ */}
                     <div>
                         <label className="block text-gray-700 font-medium mb-1">เลือกคำสั่งซื้อ</label>
                         <select
@@ -57,7 +57,7 @@ export default function TrackingForm({ tracking = null, orders }) {
                         {errors.order_id && <p className="text-red-500 text-sm">{errors.order_id}</p>}
                     </div>
 
-                    {/* 📌 สถานะการจัดส่ง (Dropdown) */}
+                    {/*  สถานะการจัดส่ง (Dropdown) */}
                     <div>
                         <label className="block text-gray-700 font-medium mb-1">สถานะการจัดส่ง</label>
                         <select
@@ -76,7 +76,7 @@ export default function TrackingForm({ tracking = null, orders }) {
                         {errors.status && <p className="text-red-500 text-sm">{errors.status}</p>}
                     </div>
 
-                    {/* 📌 ปุ่ม Submit & Cancel */}
+                    {/*  ปุ่ม Submit & Cancel */}
                     <div className="flex justify-between">
                         <button
                             type="submit"

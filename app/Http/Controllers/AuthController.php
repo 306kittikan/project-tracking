@@ -48,11 +48,11 @@ class AuthController extends Controller {
         return back()->withErrors(['email' => 'Invalid credentials.']);
     }
 
-    // ✅ แก้ไขเมธอด logout ให้ใช้งานได้
+    //  แก้ไขเมธอด logout ให้ใช้งานได้
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login'); // ✅ เปลี่ยนเป็นหน้า Login
+        return redirect('/login'); //  เปลี่ยนเป็นหน้า Login
     }
 }

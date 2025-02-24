@@ -21,6 +21,7 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
-        "@inertiajs/react": "^2.0.3"
+        "@inertiajs/react": "^2.0.3",
+        "lucide-react": "^0.475.0"
     }
 }

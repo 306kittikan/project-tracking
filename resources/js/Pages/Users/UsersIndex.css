@@ -1,0 +1,104 @@
+/* Container หลัก */
+.users-container {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+/* หัวข้อ */
+.users-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #2d3748; /* gray-800 */
+    margin-bottom: 1rem;
+}
+
+/* ข้อความต้อนรับ */
+.users-welcome {
+    text-align: center;
+    color: #4a5568; /* gray-600 */
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+}
+
+/* ปุ่มเพิ่มผู้ใช้ */
+.users-add-button {
+    display: inline-block;
+    background-color: #38a169; /* green-600 */
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.users-add-button:hover {
+    background-color: #2f855a; /* green-700 */
+}
+
+/* ตารางรายชื่อผู้ใช้ */
+.users-table-container {
+    overflow-x: auto;
+    background-color: #f7fafc; /* gray-50 */
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th {
+    background-color: #e2e8f0; /* gray-200 */
+    color: #4a5568; /* gray-700 */
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    padding: 1rem;
+    text-align: left;
+}
+
+.users-table td {
+    padding: 1rem;
+    border: 1px solid #cbd5e0;
+    text-align: left;
+}
+
+/* Hover effect */
+.users-table tbody tr:hover {
+    background-color: #edf2f7; /* gray-100 */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* ปุ่มจัดการ */
+.users-action {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.users-edit {
+    color: #3182ce; /* blue-500 */
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.users-edit:hover {
+    color: #2b6cb0; /* blue-700 */
+}
+
+.users-delete {
+    color: #e53e3e; /* red-500 */
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.users-delete:hover {
+    color: #c53030; /* red-700 */
+}

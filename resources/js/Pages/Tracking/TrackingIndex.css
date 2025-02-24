@@ -1,0 +1,155 @@
+/*  จัดรูปแบบกล่องหลัก */
+.tracking-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/*  หัวข้อหลัก */
+.tracking-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+/*  ตาราง */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.tracking-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* ป้องกันตารางเล็กเกินไป */
+}
+
+.tracking-table th {
+    background: #1f2937;
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.tracking-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.tracking-table tr:hover {
+    background: #f9fafb;
+}
+
+/*  ป้ายสถานะ */
+.status-badge {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: white;
+    font-weight: 500;
+}
+
+/*  สีของสถานะ */
+.status-pending {
+    background: #f59e0b; /* yellow-500 */
+}
+
+.status-shipped {
+    background: #3b82f6; /* blue-500 */
+}
+
+.status-cancelled {
+    background: #ef4444; /* red-500 */
+}
+
+.status-delivered {
+    background: #10b981; /* green-500 */
+}
+
+.status-default {
+    background: #6b7280; /* gray-500 */
+}
+
+/*  ปุ่ม */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: background 0.2s ease-in-out;
+    color: white;
+    margin: 0 4px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-blue { background: #3b82f6; }
+.btn-blue:hover { background: #2563eb; }
+
+.btn-yellow { background: #f59e0b; }
+.btn-yellow:hover { background: #d97706; }
+
+.btn-red { background: #ef4444; }
+.btn-red:hover { background: #dc2626; }
+
+.btn-green { background: #10b981; }
+.btn-green:hover { background: #059669; }
+
+.btn-disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+/*  ข้อความเมื่อไม่มีข้อมูล */
+.no-tracking-data {
+    text-align: center;
+    color: #6b7280;
+    padding: 1.5rem 0;
+}
+
+/*  ปุ่มเพิ่มสถานะ */
+.add-tracking-btn {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* 🔹 Responsive สำหรับจอเล็ก (มือถือ) */
+@media (max-width: 768px) {
+    .tracking-container {
+        padding: 1rem;
+    }
+
+    .tracking-title {
+        font-size: 1.25rem;
+        text-align: center;
+    }
+
+    .tracking-table {
+        font-size: 0.875rem;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .add-tracking-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .add-tracking-btn .btn {
+        width: auto;
+    }
+}
